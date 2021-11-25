@@ -37,11 +37,20 @@
                             <label class="form-label" for="Price">Price</label>
                         </div>
                          <div class=" mb-4">
-                            <select class="js-example-tags form-control">
-                            <option selected="selected">orange</option>
-                            <option>white</option>
-                            <option>purple</option>
-                            </select>
+
+                           <Multiselect
+                                v-model="value"
+                                mode="tags"
+                                :closeOnSelect="false"
+                                :searchable="true"
+                                :createTag="true"
+                                :options="[
+                                    { value: 'batman', label: 'Batman' },
+                                    { value: 'robin', label: 'Robin' },
+                                    { value: 'joker', label: 'Joker' },
+                                ]"
+                                />
+  
                         </div>
                         <!-- Submit button -->
                         <button type="submit" class="btn btn-primary btn-block mb-4">Submit</button>
@@ -83,22 +92,20 @@
 </div>
 </template>
 <script>
-
-
-
- 
+ import Multiselect from '@vueform/multiselect'
 export default {
-    
+     components: {
+    Multiselect
+  },
+  
     data() {
         return {
             programs: { },
             reviews: [],
-            dtRef: null
         }
     },
     mounted(){
     this.fetchTasks()
-    
 
   },
     methods: {
@@ -109,6 +116,7 @@ export default {
                        this.reviews = response.data;
                         $(document).ready( function () {
               $('#example').DataTable();
+            
           });
                    
                 })
@@ -118,6 +126,7 @@ export default {
         })
         
     },
+                  
         addprogram() {
            var _this = this;
             this.$axios.get('/sanctum/csrf-cookie').then(response => {
@@ -131,15 +140,10 @@ export default {
                         console.error(error);
                     });
             })
-        }
+        },
+        
+       
     },
-
-    
-    
-
-
-
-   
     beforeRouteEnter(to, from, next) {
         if (!window.Laravel.isLoggedin) {
             window.location.href = "/";
@@ -148,3 +152,4 @@ export default {
     }
 }
 </script>
+<style src="@vueform/multiselect/themes/default.css"></style>

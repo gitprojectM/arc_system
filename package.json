@@ -29,7 +29,9 @@
         "webpack-dev-server": "^4.5.0"
     },
     "dependencies": {
+        "@vueform/multiselect": "^2.2.1",
         "datatables.net-dt": "^1.11.3",
+        "vue-multiselect": "^2.1.6",
         "vue-router": "^4.0.12"
     }
 }

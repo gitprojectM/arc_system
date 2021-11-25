@@ -87,6 +87,7 @@ rel="stylesheet"
         window.Laravel = {!!json_encode([
             'isLoggedin' => false
         ])!!}
+
     </script>
 @endif
 <div id="app">
@@ -105,13 +106,7 @@ rel="stylesheet"
   type="text/javascript"
   src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.js"
 ></script>
-<script>
-  
-  $(".js-example-tags").select2({
-  tags: true
-});
-          
-</script>
+
 
 
 </body>
