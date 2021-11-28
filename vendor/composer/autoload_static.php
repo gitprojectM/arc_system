@@ -556,6 +556,7 @@ class ComposerStaticInit9d23315391b54bae01c67105e354d6bc
         'App\\Http\\Requests\\UpdateProgramRequest' => __DIR__ . '/../..' . '/app/Http/Requests/UpdateProgramRequest.php',
         'App\\Http\\Requests\\UpdateRoleRequest' => __DIR__ . '/../..' . '/app/Http/Requests/UpdateRoleRequest.php',
         'App\\Http\\Requests\\UpdateStudentRequest' => __DIR__ . '/../..' . '/app/Http/Requests/UpdateStudentRequest.php',
+        'App\\Models\\Course' => __DIR__ . '/../..' . '/app/Models/Course.php',
         'App\\Models\\Enrolment' => __DIR__ . '/../..' . '/app/Models/Enrolment.php',
         'App\\Models\\Program' => __DIR__ . '/../..' . '/app/Models/Program.php',
         'App\\Models\\Role' => __DIR__ . '/../..' . '/app/Models/Role.php',

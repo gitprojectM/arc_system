@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\Program;
+use App\Models\Course;
 use App\Http\Requests\StoreProgramRequest;
 use App\Http\Requests\UpdateProgramRequest;
 
@@ -17,9 +18,17 @@ class ProgramController extends Controller
     public function index()
     {
         $reviews = Program::all()->toArray();
-        return array_reverse($reviews);
+        $reviews = Program::with('course')->get();
+        return $reviews;
+       
+       // $reviews = Program::all()->toArray();
+       // return array_reverse($reviews);
     }
-
+    public function course()
+    {
+        $courses = Course::all()->toArray();
+        return response()->json($courses);
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -38,10 +47,10 @@ class ProgramController extends Controller
      */
     public function store(StoreProgramRequest $request)
     {
+        
         $programs = new Program([
-            'title' => $request->title,
+            'course_id' => $request->course_id,
             'review_type' => $request->review_type,
-            'year' => $request->year,
             'promo' => $request->promo,
             'price' => $request->price
         ]);
@@ -67,9 +76,10 @@ class ProgramController extends Controller
      * @param  \App\Models\Program  $program
      * @return \Illuminate\Http\Response
      */
-    public function edit(Program $program)
+    public function edit($id)
     {
-        //
+        $prog = Program::find($id);
+        return response()->json($prog);
     }
 
     /**
@@ -79,9 +89,12 @@ class ProgramController extends Controller
      * @param  \App\Models\Program  $program
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateProgramRequest $request, Program $program)
+    public function update($id,UpdateProgramRequest $request)
     {
-        //
+        $prog = Program::find($id);
+        $prog->update($request->all());
+
+        return response()->json('The book successfully updated');
     }
 
     /**
@@ -90,8 +103,12 @@ class ProgramController extends Controller
      * @param  \App\Models\Program  $program
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Program $program)
+    public function destroy($id)
     {
-        //
+        $program = Program::find($id);
+        
+        $program->delete();
+
+        return response()->json('The book successfully deleted');
     }
 }

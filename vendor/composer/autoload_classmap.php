@@ -31,6 +31,7 @@ return array(
     'App\\Http\\Requests\\UpdateProgramRequest' => $baseDir . '/app/Http/Requests/UpdateProgramRequest.php',
     'App\\Http\\Requests\\UpdateRoleRequest' => $baseDir . '/app/Http/Requests/UpdateRoleRequest.php',
     'App\\Http\\Requests\\UpdateStudentRequest' => $baseDir . '/app/Http/Requests/UpdateStudentRequest.php',
+    'App\\Models\\Course' => $baseDir . '/app/Models/Course.php',
     'App\\Models\\Enrolment' => $baseDir . '/app/Models/Enrolment.php',
     'App\\Models\\Program' => $baseDir . '/app/Models/Program.php',
     'App\\Models\\Role' => $baseDir . '/app/Models/Role.php',

@@ -16,8 +16,9 @@ Route::post('logout', [UserController::class, 'logout'])->middleware('auth:sanct
 Route::group(['prefix' => 'programs', 'middleware' => 'auth:sanctum'], function () {
     
     Route::get('/', [ProgramController::class, 'index']);
+    Route::get('/course', [ProgramController::class, 'course']);
     Route::post('add', [ProgramController::class, 'store']);
-    //Route::get('edit/{id}', [BookController::class, 'edit']);
-  //  Route::post('update/{id}', [BookController::class, 'update']);
-    //Route::delete('delete/{id}', [BookController::class, 'delete']);
+    Route::get('edit/{id}', [ProgramController::class, 'edit']);
+  Route::post('update/{id}', [ProgramController::class, 'update']);
+    Route::delete('delete/{id}', [ProgramController::class, 'destroy']);
 });

@@ -24,7 +24,11 @@ class StoreProgramRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            
+            'course_id'  => 'required',
+            'review_type'  => 'required',
+            'promo'  => 'required',
+            'price'  => 'required'
         ];
     }
 }
