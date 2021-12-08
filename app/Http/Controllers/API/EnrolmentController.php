@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\Enrolment;
+use App\Models\Program;
 use App\Http\Requests\StoreEnrolmentRequest;
 use App\Http\Requests\UpdateEnrolmentRequest;
 
@@ -37,7 +38,24 @@ class EnrolmentController extends Controller
      */
     public function store(StoreEnrolmentRequest $request)
     {
-        //
+        $enrolments = new Enrolment([
+            'stud_id' => $request->stud_id,
+            'prog_id' => $request->prog_id,
+            'mname' => $request->mname,
+            'suffix' => $request->suffix,
+            'mstatus' => $request->mstatus,
+            'gender' => $request->gender,
+            'bdate' => $request->bdate,
+            'paddress' => $request->paddress,
+            'slattended' => $request->slattended,
+            'course' => $request->course,
+            'termcon' => $request->termcon,
+            'modepay' => $request->modepay
+            
+        ]);
+        $enrolments->save();
+
+        return response()->json('You havew succesfully enrolled!!');
     }
 
     /**
@@ -83,5 +101,15 @@ class EnrolmentController extends Controller
     public function destroy(Enrolment $enrolment)
     {
         //
+    }
+
+    public function getprogram()
+    {
+        $reviews = Program::all()->toArray();
+       
+        return $reviews;
+       
+       // $reviews = Program::all()->toArray();
+       // return array_reverse($reviews);
     }
 }

@@ -15,19 +15,23 @@ class CreateStudentsTable extends Migration
     {
         Schema::create('students', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('Pro_id');
+            $table->unsignedBigInteger('course_id');
             $table->unsignedBigInteger('role_id');
             $table->string('fname');
             $table->string('lname');
             $table->string('mname');
             $table->string('sufix');
-            $table->string('course');
+            $table->string('number');
             $table->string('email')->unique();
+            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
-            $table->foreign('Pro_id')->references('id')->on('programs');
+            $table->foreign('course_id')->references('id')->on('courses');
             $table->foreign('role_id')->references('id')->on('roles');
+
+            
+          
         });
     }
 

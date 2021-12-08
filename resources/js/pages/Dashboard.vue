@@ -1,6 +1,7 @@
 <template>
     <div>
-        Welcome {{ name }}
+        Welcome {{ name }} {{ lname }}
+        
     </div>
 </template>
 
@@ -10,11 +11,13 @@ export default {
     data() {
         return {
             name: null,
+            lname: null,
         }
     },
     created() {
         if (window.Laravel.user) {
-            this.name = window.Laravel.user.name
+            this.name = window.Laravel.user.fname
+            this.lname = window.Laravel.user.lname
         }
     },
     beforeRouteEnter(to, from, next) {

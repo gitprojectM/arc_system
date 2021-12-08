@@ -12,7 +12,11 @@ import Dashboard from '../pages/Dashboard';
 //import EditBook from '../components/EditBook';
 
 import Program from '../components/review_program/Index';
-
+import Registration from '../components/student/reg';
+import Registrations from '../components/student/Regs';
+import users from '../components/user/index';
+import Course from '../components/course/index';
+import Enrollmemt from '../components/enrollment/enroll_form';
 export const routes = [
     {
         name: 'home',
@@ -39,6 +43,31 @@ export const routes = [
         name: 'program',
         path: '/program',
         component: Program
+    },
+    {
+        name: 'registration',
+        path: '/reg',
+        component: Registration
+    },
+    {
+        name: 'registrations',
+        path: '/regs',
+        component: Registrations
+    },
+    {
+        name: 'users',
+        path: '/users',
+        component: users
+    },
+    {
+        name: 'course',
+        path: '/course',
+        component: Course
+    },
+    {
+        name: 'enroll',
+        path: '/enroll',
+        component: Enrollmemt
     },
 ];
 

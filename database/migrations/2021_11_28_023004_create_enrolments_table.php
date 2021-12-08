@@ -16,16 +16,19 @@ class CreateEnrolmentsTable extends Migration
         Schema::create('enrolments', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('stud_id');
+            $table->unsignedBigInteger('prog_id');
+            $table->string('mname');
+            $table->string('suffix');
             $table->string('mstatus');
             $table->string('gender');
             $table->date('bdate');
             $table->string('paddress');
             $table->string('slattended');
-            $table->string('pnumber');
             $table->string('termcon');
             $table->string('modepay');
             $table->timestamps();
-            $table->foreign('stud_id')->references('id')->on('students');
+            $table->foreign('prog_id')->references('id')->on('programs');
+            $table->foreign('stud_id')->references('id')->on('users');
         });
     }
 

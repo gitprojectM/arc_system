@@ -2,13 +2,65 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Controllers\Controller;
+use Session;
+
 use App\Models\Student;
-use App\Http\Requests\StoreStudentRequest;
-use App\Http\Requests\UpdateStudentRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use App\Http\Controllers\Controller;
+
 
 class StudentController extends Controller
 {
+    public function add(Request $request)
+    {
+       
+       // try {
+                $students =new Student([
+                    'course_id' => $request->course_id,
+                    'role_id' => 2,
+                    'fname' => $request->fname,
+                    'lname' => $request->lname,
+                    'mname' => $request->mname,
+                    'number' => $request->pnumber, 
+                    'sufix' => $request->suffix, 
+                    'email' => $request->email,
+                    'password' => Hash::make($request->Password)
+                    // $students->course_id = $request->course_id;
+                    // $students->role_id=2;
+                    // $students->fname = $request->fname;
+                    // $students->lname = $request->lname;
+                    // $students->mname = $request->mname;
+                    // $students->suffix = $request->sufix;
+                    // $students->email = $request->email;
+               
+                    //$students->password = Hash::make($request->password);
+                ]);
+                $students->save();
+                $success = true;
+                $message = 'User register successfully';
+          
+             
+           // } catch (\Illuminate\Database\QueryException $ex) {
+                $success = false;
+               // $message = $ex->getMessage();
+         //   }
+
+               
+               
+                
+       
+    
+            // response
+            $response = [
+                'success' => $success,
+                'message' => $message,
+            ];
+            return response()->json($response);
+        }
+       
+    
     /**
      * Display a listing of the resource.
      *

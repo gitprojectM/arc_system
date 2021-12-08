@@ -20,11 +20,7 @@
                                 {{ course.title}}</option>
                             </select>
                          
-  
-                        </div>
-                       
-
-                       
+                        </div>  
               <!-- review type -->
                         <div class=" ">
                              <label class="form-label" for="Review Type">Review Type</label>
@@ -52,7 +48,7 @@
                         </div>
                        
                         </form>
-                          <form @submit.prevent="  addprogram()" v-else>
+                          <form @submit.prevent="addprogram()" v-else>
                          <div class="" >
                            
                               <label class="form-label" for="course">coures</label>
@@ -70,7 +66,7 @@
               <!-- review type -->
                         <div class="  ">
                              <label class="form-label" for="Review Type">Review Type</label>
-                            <input type="text" id="" class="form-control" v-model="programs.review_type" required />
+                            <input type="text" id="" class="form-control" v-model="programs.review_type" required/>
                            
                         </div>
 
@@ -273,4 +269,3 @@ export default {
     }
 }
 </script>
-<style src="@vueform/multiselect/themes/default.css"></style>

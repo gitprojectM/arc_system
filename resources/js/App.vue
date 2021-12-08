@@ -8,7 +8,7 @@
        id="sidebarMenu"
        class="collapse d-lg-block sidebar collapse bg-white"
           >
-    <div class="position-sticky">
+    <div class="position-sticky" v-if="role === 1">
       <div class="list-group list-group-flush mx-3 mt-4">
         <a
            href="#"
@@ -18,6 +18,7 @@
           <i class="fas fa-tachometer-alt fa-fw me-3"></i
             ><span>Main dashboard</span>
         </a>
+        
         <a
            href="/program"
            class="list-group-item list-group-item-action py-2 ripple "
@@ -26,10 +27,41 @@
             ><span>Review Program</span>
         </a>
         <a
+           href="/users"
+           class="list-group-item list-group-item-action py-2 ripple"
+           ><i class="fas fa-users me-3"></i><span>User</span></a
+          >
+        <a
+           href="/course"
+           class="list-group-item list-group-item-action py-2 ripple"
+           ><i class="fas fa-lock fa-fw me-3"></i><span>Course</span></a
+          >
+        
+        <a
            href="#"
            class="list-group-item list-group-item-action py-2 ripple"
            ><i class="fas fa-lock fa-fw me-3"></i><span>Password</span></a
           >
+        <a
+           href="#"
+           class="list-group-item list-group-item-action py-2 ripple"
+            @click="logout"><i class="fas fa-money-bill fa-fw me-3"></i><span>Logout</span></a
+          >
+      </div>
+    </div>
+      <div class="position-sticky "  v-if="role === 2">
+      <div class="list-group list-group-flush mx-3 mt-4">
+        
+         <a
+           href="/enroll"
+           class="list-group-item list-group-item-action py-2 ripple "
+           aria-current="true"
+           >
+          <i class="fas fa-tachometer-alt fa-fw me-3"></i
+            ><span>Enroll</span>
+        </a>
+       
+       
    
         <a
            href="#"
@@ -123,6 +155,7 @@
 <script>
 export default {
     name: "App",
+    rile:{},
     data() {
         return {
             isLoggedIn: false,
@@ -131,6 +164,11 @@ export default {
     created() {
         if (window.Laravel.isLoggedin) {
             this.isLoggedIn = true
+        }
+    
+     
+        if (window.Laravel.user) {
+            this.role = window.Laravel.user.role_id
         }
     },
     methods: {

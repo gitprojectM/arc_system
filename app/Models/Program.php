@@ -14,7 +14,7 @@ class Program extends Model
 
     public function program()
     {
-        return $this->hasOne(Program::class);
+       // return $this->hasOne(Program::class);
         // OR return $this->hasOne('App\User');
     }
 

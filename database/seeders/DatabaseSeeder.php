@@ -17,12 +17,18 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
 
-        DB::table('users')->insert([
-            'role_id'=>1,
-        	'name'=>'mert',
-            'email'=>'m@m',
-        	'password'=>bcrypt('654321'),
-        	'remember_token'=>Str::random(10),   
+        DB::table('students')->insert([
+           
+             'course_id' =>2,
+                    'role_id' =>2,
+                    'fname' =>'met',
+                    'lname' => 'sadfa',
+                    'mname' => 'dasd',
+                    'number' => '678698', 
+                    'sufix' =>'jkk', 
+                    'email' => 'n@n',
+                    'password'=>bcrypt('654321'),
+                    'remember_token'=>Str::random(10),  
         ]);
 
        

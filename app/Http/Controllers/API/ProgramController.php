@@ -109,6 +109,6 @@ class ProgramController extends Controller
         
         $program->delete();
 
-        return response()->json('The book successfully deleted');
+        return response()->json('The Program successfully deleted');
     }
 }
