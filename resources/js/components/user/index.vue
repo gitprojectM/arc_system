@@ -90,7 +90,13 @@ export default {
        
     },
     beforeRouteEnter(to, from, next) {
-        if (!window.Laravel.isLoggedin) {
+         if (!window.Laravel.isLoggedin) {
+            window.location.href = "/";
+        }
+         else if (window.Laravel.user.role_id !== 1) {
+            window.location.href = "/";
+        }
+        else if (!window.Laravel.isLoggedin) {
             window.location.href = "/";
         }
         next();

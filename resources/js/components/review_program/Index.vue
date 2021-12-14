@@ -1,8 +1,10 @@
 <template>
 <div class=" shadow-0 ">
+   
   <div class=""><h5 class=" ">Review Programs</h5></div>
+
   <div class="card-body">
- 
+      
         <div id="PForm" class="row">
                 <div class="col-3 col-lg-3 col-sm-3  shadow p-3 mb-5 bg-body rounded">
                  <h5 class=" "></h5>
@@ -48,11 +50,11 @@
                         </div>
                        
                         </form>
-                          <form @submit.prevent="addprogram()" v-else>
+                          <form @submit.prevent="  addprogram()" v-else>
                          <div class="" >
                            
                               <label class="form-label" for="course">coures</label>
-                         <select class="form-select" v-model="programs.course_id" placeholder="Select Course" required>
+                         <select class="form-select" v-model="programs.course_id" placeholder="Select Course" >
                            
                                 <option v-for="course in courses" :key="course.id" v-bind:value="course.id"> 
                                 {{ course.title}}</option>
@@ -66,7 +68,12 @@
               <!-- review type -->
                         <div class="  ">
                              <label class="form-label" for="Review Type">Review Type</label>
-                            <input type="text" id="" class="form-control" v-model="programs.review_type" required/>
+                           
+                             <select class="form-select" v-model="programs.review_type"  >
+                           
+                                <option value="Face to face"> Face to face </option>
+                                 <option value="Online">Online</option>
+                            </select>
                            
                         </div>
 
@@ -74,13 +81,13 @@
                         <!--promo input -->
                         <div class="  ">
                              <label class="form-label" for="Promo">Promo</label>
-                            <input type="text" id="" class="form-control" v-model="programs.promo"  required/>
+                            <input type="text" id="" class="form-control" v-model="programs.promo"  />
                            
                         </div>
                          <!-- price input -->
                         <div class="  mb-4">  
                              <label class="form-label" for="Price">Price</label>
-                            <input type="number" min="1" max="100000" class="form-control" v-model="programs.price" required />
+                            <input type="number" min="1" max="100000" class="form-control" v-model="programs.price"  />
                            
                         </div>
                          
@@ -90,6 +97,10 @@
                         </div>
                        
                         </form>
+                         <strong> Output:</strong> 
+                        <pre> 
+                        {{output}}
+                        </pre> 
                 </div>
                 <div class="col-9 col-lg-9 col-sm-9  shadow-1 shadow p-3 mb-5 bg-body rounded">
                       
@@ -143,6 +154,7 @@ export default {
             reviews: [],
             courses: [],
             prog:{},
+          output: ''
         
            
         }
@@ -194,24 +206,25 @@ export default {
            var _this = this;
             this.$axios.get('/sanctum/csrf-cookie').then(response => {
                 this.$axios.post('api/programs/add ', this.programs)
-                    .then(response => {   
-                    //this.$router.push({name: 'program'})
-                    this. programs = {'course_id': '','review_type': '','promo': '','price': ''}
-                    this.fetchTasks()
-                   // this.$router.push({name: 'program'})
-                    //  $(document).ready( function () {
-                    //      $('#example').DataTable();
-                       
-                    //       }); 
-                     $('#example').DataTable().destroy();
+                    .then(function (response){   
+                    _this.output = response.data;
+                   flash('Review Program Created Successfully', 'success');
+                   
+                   _this. programs = {'course_id': '','review_type': '','promo': '','price': ''}
+                   _this.fetchTasks()
+                  
+                    $('#example').DataTable().destroy();
                     
                           
                     })
                     .catch(function (error) {
+                        _this.output = error;
                         console.error(error);
                     });
             })
         },
+
+       
         deleteProgram(id) {
             this.$axios.get('/sanctum/csrf-cookie').then(response => {
                 this.$axios.delete(`/api/programs/delete/${id}`)
@@ -263,6 +276,12 @@ export default {
     },
     beforeRouteEnter(to, from, next) {
         if (!window.Laravel.isLoggedin) {
+            window.location.href = "/";
+        }
+         else if (window.Laravel.user.role_id !== 1) {
+            window.location.href = "/";
+        }
+        else if (!window.Laravel.isLoggedin) {
             window.location.href = "/";
         }
         next();

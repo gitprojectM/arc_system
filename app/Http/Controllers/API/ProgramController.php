@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers\API;
 
+
 use App\Http\Controllers\Controller;
 use App\Models\Program;
 use App\Models\Course;
 use App\Http\Requests\StoreProgramRequest;
 use App\Http\Requests\UpdateProgramRequest;
+use Illuminate\Contracts\Validation\Rule;
+use Illuminate\Support\Facades\Validator;
 
 class ProgramController extends Controller
 {
@@ -47,6 +50,15 @@ class ProgramController extends Controller
      */
     public function store(StoreProgramRequest $request)
     {
+        $validated = $request->validate([
+           
+            'course_id' =>  'required|numeric',
+            'review_type' => 'required',
+            'promo' => 'required|max:255',
+            'price' => 'required|numeric'
+        ]);
+        
+    
         
         $programs = new Program([
             'course_id' => $request->course_id,

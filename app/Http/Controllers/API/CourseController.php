@@ -1,21 +1,29 @@
 <?php
 
 namespace App\Http\Controllers\API;
+use App\Http\Library\ApiHelpers;
 use App\Models\Course;
+//use App\Models\User;
 use App\Http\Controllers\Controller;
+
 use Illuminate\Http\Request;
 
+use Illuminate\Http\JsonResponse;
 class CourseController extends Controller
 {
+
+    use ApiHelpers; 
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    { 
+      
         $courses = Course::all()->toArray();
         return response()->json($courses);
+       
     }
 
     /**
@@ -38,15 +46,17 @@ class CourseController extends Controller
     {
        
    
-        
-        $cors = new Course([
+       
+            $cors = new Course([
             
-            'title' => $request->title,
-         
-        ]);
-        $cors->save();
-
-        return response()->json('The Course successfully added');
+                'title' => $request->title,
+             
+            ]);
+            $cors->save();
+    
+            return response()->json('The Course successfully added');
+      
+       
    
 
     }

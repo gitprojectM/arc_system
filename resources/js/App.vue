@@ -1,6 +1,6 @@
 <template>
 
-  
+  <flash message=""></flash>
     <!--Main Navigation-->
 <div v-if="isLoggedIn">
   <!-- Sidebar -->
@@ -10,38 +10,24 @@
           >
     <div class="position-sticky" v-if="role === 1">
       <div class="list-group list-group-flush mx-3 mt-4">
-        <a
-           href="#"
-           class="list-group-item list-group-item-action py-2 ripple active"
-           aria-current="true"
-           >
+       
+         <router-link to="/dashboard"  class="list-group-item list-group-item-action py-2 ripple" active-class="active" 
+           aria-current="true">
           <i class="fas fa-tachometer-alt fa-fw me-3"></i
             ><span>Main dashboard</span>
-        </a>
-        
-        <a
-           href="/program"
-           class="list-group-item list-group-item-action py-2 ripple "
-           >
-          <i class="fas fa-chart-area fa-fw me-3"></i
+       </router-link>
+     <router-link to="/program" class="list-group-item list-group-item-action py-2 ripple " active-class="active" >
+      <i class="fas fa-chart-area fa-fw me-3"></i
             ><span>Review Program</span>
-        </a>
-        <a
-           href="/users"
-           class="list-group-item list-group-item-action py-2 ripple"
-           ><i class="fas fa-users me-3"></i><span>User</span></a
-          >
-        <a
-           href="/course"
-           class="list-group-item list-group-item-action py-2 ripple"
-           ><i class="fas fa-lock fa-fw me-3"></i><span>Course</span></a
-          >
-        
-        <a
-           href="#"
-           class="list-group-item list-group-item-action py-2 ripple"
-           ><i class="fas fa-lock fa-fw me-3"></i><span>Password</span></a
-          >
+     </router-link >
+       <router-link to="/users" class="list-group-item list-group-item-action py-2 ripple" active-class="active" >
+<i class="fas fa-users me-3"></i><span>User</span>
+       </router-link>
+         
+        <router-link to="/course"   class="list-group-item list-group-item-action py-2 ripple" active-class="active" >
+         <i class="fas fa-lock fa-fw me-3"></i><span>Course</span>
+        </router-link>
+       
         <a
            href="#"
            class="list-group-item list-group-item-action py-2 ripple"
@@ -52,14 +38,19 @@
       <div class="position-sticky "  v-if="role === 2">
       <div class="list-group list-group-flush mx-3 mt-4">
         
-         <a
-           href="/enroll"
-           class="list-group-item list-group-item-action py-2 ripple "
-           aria-current="true"
-           >
+          <router-link  :to="{ path: 'dashboard' }"  class="list-group-item list-group-item-action py-2 ripple" active-class="active" 
+           aria-current="true">
           <i class="fas fa-tachometer-alt fa-fw me-3"></i
+            ><span>Main dashboard</span>
+        </router-link>
+        <router-link v-bind:to="'enroll'"   class="list-group-item list-group-item-action py-2 ripple" active-class="active" >
+                <i class="fas fa-tachometer-alt fa-fw me-3"></i
             ><span>Enroll</span>
-        </a>
+          </router-link>
+      
+        
+        
+       
        
        
    
@@ -96,25 +87,14 @@
       <!-- Brand -->
       <a class="navbar-brand" href="#">
         <img
-             src="https://arellanoreviewcenter.com/wp-content/uploads/2021/11/LOGOSITE.png"
+             src=""
              height="25"
              alt=""
              loading="lazy"
              />
       </a>
       <!-- Search form -->
-      <form class="d-none d-md-flex input-group w-auto my-auto">
-        <input
-               autocomplete="off"
-               type="search"
-               class="form-control rounded"
-               placeholder='Search (ctrl + "/" to focus)'
-               style="min-width: 225px"
-               />
-        <span class="input-group-text border-0"
-              ><i class="fas fa-search"></i
-          ></span>
-      </form>
+     
 
       <!-- Right links -->
       <ul class="navbar-nav ms-auto d-flex flex-row">
@@ -153,6 +133,7 @@
 </template>
 
 <script>
+
 export default {
     name: "App",
     rile:{},
@@ -161,7 +142,7 @@ export default {
             isLoggedIn: false,
         }
     },
-    created() {
+    mounted() {
         if (window.Laravel.isLoggedin) {
             this.isLoggedIn = true
         }

@@ -18,6 +18,7 @@ import users from '../components/user/index';
 import Course from '../components/course/index';
 import Enrollmemt from '../components/enrollment/enroll_form';
 export const routes = [
+    
     {
         name: 'home',
         path: '/home',

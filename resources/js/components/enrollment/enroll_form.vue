@@ -14,10 +14,10 @@
 
               <div class="row">
                 <div class="col-md-6 mb-4">
-
+                <input type="text"  class="form-control" v-model="enrollee.stud_id"  hidden/>
                   <div class="form-outline">
                     <input type="text"  class="form-control" v-model="name"  readonly/>
-                    <input type="text"  class="form-control" v-model="enrollee.stud_id"/>
+                   
                     <label class="form-label" for="firstName">First Name</label>
                   </div>
 
@@ -194,25 +194,25 @@ export default {
               id: null
         }
     },
-    created() {
-        this.$axios.get('/sanctum/csrf-cookie').then(response => {
+    
+   created() {
+         this.$axios.get('/sanctum/csrf-cookie').then(response => {
             this.$axios.get('api/enroll/getprogram')
                 .then(response => {
                     this.reviews = response.data;
-                    console.log(this.reviews);
+                   
                 })
                 .catch(function (error) {
                     console.error(error);
                 });
         })
 
-        if (window.Laravel.user) {
+          if (window.Laravel.user) {
             this.name = window.Laravel.user.fname
             this.lname = window.Laravel.user.lname
             this.enrollee.stud_id = window.Laravel.user.id
 
         }
-        
     },
     methods: {
         enrollment() {
@@ -235,9 +235,13 @@ export default {
         }
     },
     beforeRouteEnter(to, from, next) {
-        if (!window.Laravel.isLoggedin) {
+         if (!window.Laravel.isLoggedin) {
             window.location.href = "/";
         }
+         else if (window.Laravel.user.role_id !== 2) {
+            window.location.href = "/";
+        }
+        
         next();
     }
 }

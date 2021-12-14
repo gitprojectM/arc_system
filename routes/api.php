@@ -9,6 +9,9 @@ use App\Http\Controllers\API\EnrolmentController;
 
 use Illuminate\Support\Facades\Route;
 
+Route::group(['middleware' => 'prevent-back-history'],function(){
+
+
 Route::post('stud', [StudentController::class, 'add']);
 Route::post('login', [UserController::class, 'login']);
 Route::post('register', [UserController::class, 'register']);
@@ -19,7 +22,7 @@ Route::post('logout', [UserController::class, 'logout'])->middleware('auth:sanct
 
 
 
-Route::group(['prefix' => 'programs', 'middleware' => 'auth:sanctum'], function () {
+Route::group(['prefix' => 'programs', 'middleware' => 'isAdmin'], function () {
     
     Route::get('/', [ProgramController::class, 'index']);
     Route::get('/course', [ProgramController::class, 'course']);
@@ -28,12 +31,12 @@ Route::group(['prefix' => 'programs', 'middleware' => 'auth:sanctum'], function 
   Route::post('update/{id}', [ProgramController::class, 'update']);
     Route::delete('delete/{id}', [ProgramController::class, 'destroy']);
 });
-Route::group(['prefix' => 'users', 'middleware' => 'auth:sanctum'], function () {
+Route::group(['prefix' => 'users', 'middleware' => 'isAdmin'], function () {
     
   Route::get('/', [UserController::class, 'index']);
  
 });
-Route::group(['prefix' => 'courses', 'middleware' => 'auth:sanctum'], function () {
+Route::group(['prefix' => 'courses', 'middleware' =>'isAdmin'], function () {
     
   Route::get('/', [CourseController::class, 'index']);
   Route::post('add', [CourseController::class, 'store']);
@@ -41,14 +44,16 @@ Route::group(['prefix' => 'courses', 'middleware' => 'auth:sanctum'], function (
   Route::post('update/{id}', [CourseController::class, 'update']);
   Route::delete('delete/{id}', [CourseController::class, 'destroy']);
 });
-Route::group(['prefix' => 'enroll', 'middleware' => 'auth:sanctum'], function () {
+Route::group(['prefix' => 'enroll', 'middleware' => 'isStudent'], function () {
     
  // Route::get('/', [EnrolmentController::class, 'index']);
   Route::post('add', [EnrolmentController::class, 'store']);
-  Route::get('edit/{id}', [EnrolmentController::class, 'edit']);
+  //Route::get('edit/{id}', [EnrolmentController::class, 'edit']);
  // Route::post('update/{id}', [EnrolmentController::class, 'update']);
   //Route::delete('delete/{id}', [EnrolmentController::class, 'destroy']);
   Route::get('getprogram', [EnrolmentController::class, 'getprogram']);
 });
 
 Route::get('/course', [ProgramController::class, 'course']);
+
+});

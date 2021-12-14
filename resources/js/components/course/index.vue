@@ -1,6 +1,6 @@
 <template>
 <div class=" shadow-0 ">
-  <div class=""><h5 class=" ">Review Programs</h5></div>
+  <div class=""><h5 class=" ">Courses</h5></div>
   <div class="card-body">
  
         <div id="PForm" class="row">
@@ -195,10 +195,16 @@ export default {
        
     },
     beforeRouteEnter(to, from, next) {
-        if (!window.Laravel.isLoggedin) {
+         if (!window.Laravel.isLoggedin) {
             window.location.href = "/";
         }
-        next();
+         else if (window.Laravel.user.role_id !== 1) {
+            window.location.href = "/";
+        }
+        else if (!window.Laravel.isLoggedin) {
+            window.location.href = "/";
+        }
+        else next();
     }
 }
 </script>
